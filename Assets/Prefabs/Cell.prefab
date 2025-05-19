@@ -386,9 +386,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  cellRenderer: {fileID: 8271327131963329928}
   oSprite: {fileID: 915253554130651319}
   xleftToRightLine: {fileID: 6217225229585414133}
   xrightToLeftLine: {fileID: 993033192813780306}
+  oPre: {fileID: 21300000, guid: 70beb75bf5f92b74eb8f5c0cbf755d4c, type: 3}
+  xPre: {fileID: 21300000, guid: 6ce248b1d1826304696436042460b35b, type: 3}
+  cellSprite: {fileID: 21300000, guid: 15f706f41272f5e4ab0c99e005583919, type: 3}
   logicalPosition: {x: 0, y: 0}
 --- !u!61 &109882174298296409
 BoxCollider2D:

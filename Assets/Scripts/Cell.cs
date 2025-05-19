@@ -3,24 +3,35 @@ using DG.Tweening;
 
 public class Cell : MonoBehaviour
 {     
+    //棋格状态
     public CellState currentState;
 
+    [SerializeField] private SpriteRenderer cellRenderer;   // 格子的SpriteRenderer
     [SerializeField] private SpriteRenderer oSprite;  //O
     [SerializeField] private SpriteRenderer xleftToRightLine; // X \  斜杠
     [SerializeField] private SpriteRenderer xrightToLeftLine; // X /  斜杠
+
+    public Sprite oPre;
+    public Sprite xPre;
+    public Sprite cellSprite;
 
     private Material oMaterial;
     private Material xltrMaterial;
     private Material xrtlMaterial;
 
+
+    private bool isPlayerDrawed = false;    //是不是玩家画的  玩家画的为真
+
     //逻辑坐标
-    public Vector2Int logicalPosition; // 该格子在棋盘中的行列（如 0,0）    
+    public Vector2Int logicalPosition; // 格子在棋盘中的行列    
 
     //初始化格子
     public void Init(Vector2Int pos)
     {
         currentState= CellState.Empty;
         logicalPosition = pos;
+        isPlayerDrawed = false;
+        cellRenderer.sprite = cellSprite; // 初始图
 
         // 获取 Sprite 的材质
         oMaterial = oSprite.material;
@@ -33,29 +44,59 @@ public class Cell : MonoBehaviour
         xrtlMaterial.SetFloat("_FillAmount", 0);
     }
 
+
     private void OnMouseDown()
     {
-
-        if (currentState != CellState.Empty)
-            return;
-
-        GameManager.Instance.OnCellClicked(this);
-        Debug.Log("点了");
+        if (IsClickable())
+        {
+            isPlayerDrawed= true;   //玩家点的
+            GameManager.Instance.isPlayerTurn = false;  //禁用输入
+            SetMark(GameManager.Instance.playerRole);   //绘制玩家所选符号
+        }
     }
 
+    private void OnMouseEnter()
+    {
+        if (IsClickable())
+        {
+            Sprite sprite = GameManager.Instance.playerRole == Role.X ? xPre : oPre;
+            cellRenderer.sprite = sprite;   //显示玩家所选符号
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        // 恢复为原来的空图
+        cellRenderer.sprite = cellSprite;
+    }
+
+    //刷新鼠标所指的格子
+    public void RefreshHoverVisual()
+    {
+        if (IsClickable())
+        {
+            Sprite sprite = GameManager.Instance.playerRole == Role.X ? xPre : oPre;
+            cellRenderer.sprite = sprite;   //显示玩家所选符号
+        }
+        else
+        {
+            // 恢复为原来的空图
+            cellRenderer.sprite = cellSprite;
+        }
+    }
+
+    //绘制棋子符号
     public void SetMark(Role role)
     {             
         switch (role)
         {
             case Role.X:
-                Debug.Log("X");
                 currentState = CellState.X;
-                DrawXMark();
+                DrawXMark();    //播放X的绘制动画
                 break;
             case Role.O:
-                Debug.Log("O");
                 currentState = CellState.O;
-                DrawOMark();
+                DrawOMark();    //播放O的绘制动画
                 break;
         }
     }
@@ -74,27 +115,35 @@ public class Cell : MonoBehaviour
                 () => xrtlMaterial.GetFloat("_FillAmount"),
                 x => xrtlMaterial.SetFloat("_FillAmount", x),
                 1f, 0.5f).SetEase(Ease.Linear))
-            .OnComplete(() => Debug.Log("X绘制完成"));
+            .OnComplete(() =>
+            {
+                GameManager.Instance.OnDrawMarkFinished(this,isPlayerDrawed);   //绘制完成，通知GameManager继续处理
+            });
+       
+    {
+
+    }
     }
     private void DrawOMark()
     {
-        // 使用 DOTween 动画从 0 填充到 1（顺时针动画）
+        // 顺时针动画
         DOTween.To(
             () => oMaterial.GetFloat("_FillAmount"), // 获取当前值
-            (value) => oMaterial.SetFloat("_FillAmount", value), // 设置新值
-            1f, // 目标值（1 = 完全填充）
-            0.7f  // 动画持续时间
+            (value) => oMaterial.SetFloat("_FillAmount", value), 
+            1f, // 完全填充
+            0.7f  // 持续时间
         )
-        .SetEase(Ease.Linear) // 线性动画（类似 CD 旋转）
+        .SetEase(Ease.Linear) 
         .OnComplete(() =>
         {
-            Debug.Log("填充动画完成！");
-            // 动画结束后的回调（可选）
+            GameManager.Instance.OnDrawMarkFinished(this,isPlayerDrawed);   //绘制完成
         });
     }
 
-    public Vector2Int GetGridPosition()
+    //查询棋格是否可点
+    public bool IsClickable()
     {
-        return logicalPosition;
+        return currentState == CellState.Empty && GameManager.Instance.isPlayerTurn;
     }
+
 }

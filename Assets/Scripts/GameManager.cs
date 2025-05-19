@@ -1,16 +1,17 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
-//先手X、后手O
+//先手X、后手O   玩家的选边
 public enum Role
 {
     X,
     O
 }
 
-//棋格状态
+//棋格状态  每个格子
 public enum CellState
 {
     Empty,
@@ -24,10 +25,10 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public GameObject cellPrefab;      // 格子Prefab
-    public Transform cellsParent;      // 格子容器
-
+    public Transform cellsParent;      // 格子的容器
     public GameObject boardGO;  //棋盘GO
-     
+
+
     #region 格子图片
     private const float CELL_PIXEL_SIZE = 144f;
     private const float LINE_THICKNESS = 12f;
@@ -37,18 +38,19 @@ public class GameManager : MonoBehaviour
     private float CellSpacing => (CELL_PIXEL_SIZE + LINE_THICKNESS) / PPU;
     #endregion
 
-    private Role playerRole;       // 玩家选择的棋子类型 X、O
-    private Role aiRole;    //AI的棋子类型
+    public Role playerRole;       // 玩家选择的棋子类型 X、O
+    public Role aiRole;    //AI的棋子类型
 
-    //private Role currentRole;       // 当前回合的棋子类型 X、O
+    //达成3子的连线
+    public LineRenderer winLineRenderer;
 
-    //棋子列表
+    //棋子的列表
     private Cell[,] cells = new Cell[3, 3];
-    //棋盘数据
+    //棋盘的数据
     private CellState[,] board = new CellState[3, 3];
 
-    //玩家可以操作
-    public bool IsPlayerTurn;
+    //玩家是否可以操作
+    public bool isPlayerTurn;
 
     private void Awake()
     {
@@ -57,19 +59,16 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        
+        UIManager.Instance.ShowMenu();  //进入菜单面板
     }
 
-    //游戏开始菜单
-    private void ShowTitle()
-    {
 
-    }
-
+    //开始新游戏  选边按钮的点击事件 先手X 后手O
     public void StartNewGame(string role)
     {
+        winLineRenderer.enabled = false;    //隐藏掉3子的连线
         //禁用玩家输入
-        IsPlayerTurn = false;
+        isPlayerTurn = false;
 
         //设置玩家和电脑的棋子类型
         switch (role)
@@ -102,20 +101,21 @@ public class GameManager : MonoBehaviour
         if (player)
         {
             //玩家下第一步
-            IsPlayerTurn = true;
+            GoPlayerTurn();
         }
         else
         {
-            //电脑下第一步
-            IsPlayerTurn = false;
-            AIThinkPlay();
+            //电脑下第一步            
+            GoAiTurn();
         }
     }   
 
     //绘制棋盘
     public void DrawBoard()
     {
+        
         boardGO.SetActive(true);
+
         if (cellPrefab == null || cellsParent == null)
         {
             Debug.LogError("没拖格子");
@@ -138,85 +138,93 @@ public class GameManager : MonoBehaviour
                 float y = (1 - row) * CellSpacing;
                 Vector3 position = new Vector3(x, y, 0f);
 
-                // 实例化格子
+                // 实例化棋子格子
                 GameObject cellGO = Instantiate(cellPrefab, position, Quaternion.identity, cellsParent);
-                cellGO.name = $"Cell_{row}_{col}"; // 起名为 Cell_0_0 ~ Cell_2_2
+                cellGO.name = $"Cell_{row}_{col}"; // Cell_0_0 - Cell_2_2
 
-                // 初始化棋子
+                // 对棋子进行初始化
                 Cell cell = cellGO.GetComponent<Cell>();
                 cell.Init(new Vector2Int(col, row));
 
-                cells[col, row] = cell;
+                //记录棋子和棋盘数据
+                cells[col, row] = cell; 
                 board[col, row] = CellState.Empty;
             }
         }
-        Debug.Log("棋盘格子生成完毕");
+        Debug.Log("棋盘生成完毕");
     }
 
-    public void OnCellClicked(Cell cell)
-    {        
-        cell.SetMark(playerRole);
-        board[cell.logicalPosition.x, cell.logicalPosition.y] = playerRole == Role.X ? CellState.X : CellState.O;
-        if(IsGameOver(out CellState winner, out List<Vector2Int> winLine))  //游戏结束
-        {
-            //禁止玩家输入
-            IsPlayerTurn = false;
-            ShowGameResult(winner, winLine);
-            return;
-        }
-        else
-        {
-            AIThinkPlay();
-        }        
-    }
 
-    //进入下一回合
-    private void GoPlayerTurn()
+    //落子完成后的处理
+    public void OnDrawMarkFinished(Cell cell,bool isPlayerDrawed)
     {
-        IsPlayerTurn = true;
-    }
-
-    private void ShowGameResult(CellState winner, List<Vector2Int> winLine)
-    {
-        if (winner == CellState.Empty)
+        if(isPlayerDrawed)  //这个子是玩家下的
         {
-            Debug.Log("游戏结束，平局！");
-        }
-        else
-        {
-            Debug.Log($"游戏结束，{winner} 获胜！");
-            Debug.Log("连线格子坐标：");
-            foreach (var pos in winLine)
+            board[cell.logicalPosition.x, cell.logicalPosition.y] = playerRole == Role.X ? CellState.X : CellState.O;   //更新棋盘数据
+            if (IsGameOver(out CellState winner, out List<Vector2Int> winLine))  //游戏结束
             {
-                Debug.Log($"({pos.x}, {pos.y})");
+                //禁止玩家输入
+                isPlayerTurn = false;
+                ShowGameResult(winner, winLine);
+                return;
+            }
+            else
+            {
+                //胜负没分就进入下一回合
+                GoAiTurn();
             }
         }
+        else
+        {     
+            //这个子是电脑下的
+            //检查游戏是否结束
+            if (IsGameOver(out CellState winner, out List<Vector2Int> winLine))  //游戏结束
+            {
+                //禁止玩家输入
+                isPlayerTurn = false;
+                ShowGameResult(winner, winLine);
+                return;
+            }
+            else
+            {
+                //胜负没分就进入下一回合
+                GoPlayerTurn();     //进入玩家回合
+            }
+        }
+
     }
 
-
-
-    private void AIThinkPlay()
+    //进入玩家回合
+    private void GoPlayerTurn()
     {
-        //ai思考落子位置
-        Vector2Int aiMove = FindBestMove();
-        //AI下棋
-        cells[aiMove.x, aiMove.y].SetMark(aiRole);
-        // 更新棋盘数据
-        board[aiMove.x, aiMove.y] = aiRole == Role.X ? CellState.X : CellState.O;
+        //允许点击
+        isPlayerTurn = true;
+        //刷新鼠标当前所指格子的显示状态
+        RefreshHover();
+    }
 
-        //检查游戏是否结束
-        if (IsGameOver(out CellState winner, out List<Vector2Int> winLine))  //游戏结束
-        {
-            //禁止玩家输入
-            IsPlayerTurn = false;
-            ShowGameResult(winner, winLine);
-            return;
-        }
-        else
-        {
-            GoPlayerTurn();     //进入玩家回合
-        }
-        
+    //进入电脑回合
+    private void GoAiTurn()
+    {
+        //禁用玩家点击
+        isPlayerTurn = false;
+        RefreshHover(); 
+
+        UIManager.Instance.ShowThinkingText(); // 显示电脑正在思考
+        StartCoroutine(AIDelayedMove());    //假装思考后下子
+    }
+
+    //AI思考后下棋
+    private IEnumerator AIDelayedMove()
+    {
+        //假装思考一下
+        yield return new WaitForSeconds(Random.Range(0.9f, 1.5f));
+
+        Vector2Int aiMove = FindBestMove(); //选择下棋位置
+        cells[aiMove.x, aiMove.y].SetMark(aiRole);  //落子
+        board[aiMove.x, aiMove.y] = aiRole == Role.X ? CellState.X : CellState.O;   //更新棋盘数据
+
+        UIManager.Instance.HideThinkingText(); // 隐藏电脑正在思考的文本
     }
 
     // AI寻找最佳落子位置
@@ -243,7 +251,7 @@ public class GameManager : MonoBehaviour
                     CellState[,] newBoard = CloneBoard(board);
                     newBoard[i, j] = checkState;
 
-                    // 计算分数（起始当前回合是玩家回合）              
+                    // 计算分数（起始current回合是玩家回合）              
                     int score = Minimax(newBoard, playerState, checkState, 1);
 
                     // 更新最优走法list
@@ -268,11 +276,8 @@ public class GameManager : MonoBehaviour
             int index = Random.Range(0, bestMoves.Count);
             bestMove = bestMoves[index];
         }
-
         return bestMove;
     }
-
-
 
     // 极大极小算法
     private int Minimax(CellState[,] board, CellState currentCellState, CellState aiCellState, int depth)
@@ -307,7 +312,7 @@ public class GameManager : MonoBehaviour
                 bestValue = Mathf.Max(bestValue, Minimax(newBoard, nextCellState, aiCellState, depth + 1));
             }
         }
-        else  // 最小化层 模拟玩家下
+        else  // 最小化层 玩家下
         {
             bestValue = int.MaxValue;
             foreach (var move in moves)
@@ -320,6 +325,65 @@ public class GameManager : MonoBehaviour
         }
         return bestValue;
     }
+
+
+
+    //对局已结束，展示游戏结果
+    private void ShowGameResult(CellState winner, List<Vector2Int> winLine)
+    {
+        if (winner == CellState.Empty)
+        {
+            UIManager.Instance.ShowGameOver("平局");
+        }
+        else
+        {           
+            Vector3 start = cells[winLine[0].x, winLine[0].y].transform.position;
+            Vector3 end = cells[winLine[2].x, winLine[2].y].transform.position;
+
+            winLineRenderer.textureMode = LineTextureMode.Stretch; 
+            winLineRenderer.startWidth = 1f;
+            winLineRenderer.endWidth = 1f;
+
+            start.z = -1;
+            end.z = -1;
+
+            winLineRenderer.positionCount = 2;
+            winLineRenderer.SetPosition(0, start);
+            winLineRenderer.SetPosition(1, start); 
+
+            winLineRenderer.enabled = true;
+
+            DOTween.To(
+                 () => start,                                     
+                 val => winLineRenderer.SetPosition(1, val),      
+                 end,                                            
+                 1f  // 用时1秒
+             )
+             .SetEase(Ease.Linear)
+             .OnComplete(() =>
+             {
+                 CellState playerState = playerRole == Role.X ? CellState.X : CellState.O;
+                 string resultText = winner == playerState ? "你赢了（你怎么做到的？）" : "你输了";        
+                 UIManager.Instance.ShowGameOver(resultText);       //显示游戏结果
+             });                    
+        }
+    }
+
+
+    //重新开始游戏 重新开始的按钮的点击事件
+    public void RestartGame()
+    {
+        winLineRenderer.enabled = false;    //隐藏胜利的3子连线
+        boardGO.SetActive(false);       //关掉棋盘
+        UIManager.Instance.RestartGame();
+    }
+
+    //退出游戏 退出游戏的按钮点击事件
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
 
     #region 辅助方法
 
@@ -356,7 +420,7 @@ public class GameManager : MonoBehaviour
         return CellState.Empty;
     }
 
-    //判断游戏是否结束 记录连线
+    //判断游戏是否结束 记录3子连线   每次落子行为后检查
     private bool IsGameOver(out CellState winner, out List<Vector2Int> winLine)
     {
         winLine = new List<Vector2Int>();
@@ -455,20 +519,25 @@ public class GameManager : MonoBehaviour
                     moves.Add(new Vector2Int(i, j));
         return moves;
     }
+
+    //刷新鼠标指针
+    private void RefreshHover()
+    {
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePos2D = new Vector2(mouseWorldPos.x, mouseWorldPos.y);
+
+        RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
+        if (hit.collider != null)
+        {
+            Cell cell = hit.collider.GetComponent<Cell>();
+            if (cell != null)
+            {
+                cell.RefreshHoverVisual(); 
+            }
+        }
+    }
     #endregion
 
 
-
-
-    //void StartGame(bool playerGoesFirst);
-    //void RestartGame();
-    //void PlayerMove(int x, int y);
-    //void AIMove();
-    //void EndGame(string result); // "Player Wins", "AI Wins", "Draw"
-
-    //void UndoMove(); // 悔棋功能
-
-    //bool IsPlayerTurn();
-    //bool IsGameOver();
 }
 
