@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public GameObject menuGO;   //主菜单（包括标题、开始游戏、退出游戏、游戏选边）
     public GameObject btnsGO;   //菜单选项组： 开始、退出
     public GameObject roleGO;   //棋子选边面板： 先手X 和 后手O
+    public GameObject tutorialGO;   //玩法说明
 
     //AI思考提示文字  AI思考中。。。
     public TextMeshProUGUI thinkingText;    
@@ -92,6 +93,16 @@ public class UIManager : MonoBehaviour
         menuGO.SetActive(true);
         gameOverPanel.SetActive(false);
         ChooseRole();
+    }
+
+    public void ShowTutorial()
+    {
+        tutorialGO.SetActive(true);
+    }
+
+    public void HideTutorial()
+    {
+        tutorialGO.SetActive(false);
     }
 
 }

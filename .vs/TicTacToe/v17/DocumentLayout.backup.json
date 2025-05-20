@@ -3,24 +3,28 @@
   "WorkspaceRootPath": "E:\\UProjects\\TicTacToe\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|e:\\uprojects\\tictactoe\\assets\\shaders\\lefttorightfill.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "AbsoluteMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|E:\\UProjects\\TicTacToe\\assets\\scripts\\cell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\cell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|e:\\uprojects\\tictactoe\\assets\\scripts\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|E:\\UProjects\\TicTacToe\\assets\\shaders\\righttoleftfill.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|solutionrelative:assets\\shaders\\righttoleftfill.shader||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|E:\\UProjects\\TicTacToe\\assets\\shaders\\lefttorightfill.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|solutionrelative:assets\\shaders\\lefttorightfill.shader||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|e:\\uprojects\\tictactoe\\assets\\shaders\\circlefill.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "AbsoluteMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|E:\\UProjects\\TicTacToe\\assets\\shaders\\circlefill.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|solutionrelative:assets\\shaders\\circlefill.shader||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|E:\\UProjects\\TicTacToe\\assets\\scripts\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|E:\\UProjects\\TicTacToe\\assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|E:\\UProjects\\TicTacToe\\assets\\scripts\\cell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\cell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,24 +34,35 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "RightToLeftFill.shader",
+              "DocumentMoniker": "E:\\UProjects\\TicTacToe\\Assets\\Shaders\\RightToLeftFill.shader",
+              "RelativeDocumentMoniker": "Assets\\Shaders\\RightToLeftFill.shader",
+              "ToolTip": "E:\\UProjects\\TicTacToe\\Assets\\Shaders\\RightToLeftFill.shader",
+              "RelativeToolTip": "Assets\\Shaders\\RightToLeftFill.shader",
+              "ViewState": "AgIAACEAAAAAAAAAAEBdwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
+              "WhenOpened": "2025-05-19T10:07:47.203Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "LeftToRightFill.shader",
               "DocumentMoniker": "E:\\UProjects\\TicTacToe\\Assets\\Shaders\\LeftToRightFill.shader",
               "RelativeDocumentMoniker": "Assets\\Shaders\\LeftToRightFill.shader",
               "ToolTip": "E:\\UProjects\\TicTacToe\\Assets\\Shaders\\LeftToRightFill.shader",
               "RelativeToolTip": "Assets\\Shaders\\LeftToRightFill.shader",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAEBdwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
-              "WhenOpened": "2025-05-19T10:07:35.526Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-19T10:07:35.526Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "CircleFill.shader",
               "DocumentMoniker": "E:\\UProjects\\TicTacToe\\Assets\\Shaders\\CircleFill.shader",
               "RelativeDocumentMoniker": "Assets\\Shaders\\CircleFill.shader",
@@ -55,24 +70,24 @@
               "RelativeToolTip": "Assets\\Shaders\\CircleFill.shader",
               "ViewState": "AgIAACoAAAAAAAAAAEBdwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
-              "WhenOpened": "2025-05-19T10:07:20.758Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-19T10:07:20.758Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "UIManager.cs",
               "DocumentMoniker": "E:\\UProjects\\TicTacToe\\Assets\\Scripts\\UIManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UIManager.cs",
               "ToolTip": "E:\\UProjects\\TicTacToe\\Assets\\Scripts\\UIManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\UIManager.cs",
-              "ViewState": "AgIAAFAAAAAAAAAAAABCwBEAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAFkAAAAAAAAAAAA1wGoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-19T04:43:47.594Z"
+              "WhenOpened": "2025-05-19T04:43:47.594Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "GameManager.cs",
               "DocumentMoniker": "E:\\UProjects\\TicTacToe\\Assets\\Scripts\\GameManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\GameManager.cs",
@@ -84,7 +99,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "Cell.cs",
               "DocumentMoniker": "E:\\UProjects\\TicTacToe\\Assets\\Scripts\\Cell.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Cell.cs",
@@ -92,7 +107,8 @@
               "RelativeToolTip": "Assets\\Scripts\\Cell.cs",
               "ViewState": "AgIAAGAAAAAAAAAAAAAowHcAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-19T03:13:00.762Z"
+              "WhenOpened": "2025-05-19T03:13:00.762Z",
+              "EditorCaption": ""
             }
           ]
         }
