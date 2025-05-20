@@ -3,11 +3,15 @@
   "WorkspaceRootPath": "E:\\UProjects\\TicTacToe\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|E:\\UProjects\\TicTacToe\\assets\\scripts\\cell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|E:\\UProjects\\TicTacToe\\assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|e:\\uprojects\\tictactoe\\assets\\scripts\\cell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\cell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|e:\\uprojects\\tictactoe\\assets\\scripts\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|E:\\UProjects\\TicTacToe\\assets\\scripts\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -21,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|E:\\UProjects\\TicTacToe\\assets\\shaders\\circlefill.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|solutionrelative:assets\\shaders\\circlefill.shader||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|E:\\UProjects\\TicTacToe\\assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EC85223C-5F0F-1F9D-B45A-9D9BC3BA2DEC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,11 +34,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "RightToLeftFill.shader",
               "DocumentMoniker": "E:\\UProjects\\TicTacToe\\Assets\\Shaders\\RightToLeftFill.shader",
               "RelativeDocumentMoniker": "Assets\\Shaders\\RightToLeftFill.shader",
@@ -50,7 +50,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "LeftToRightFill.shader",
               "DocumentMoniker": "E:\\UProjects\\TicTacToe\\Assets\\Shaders\\LeftToRightFill.shader",
               "RelativeDocumentMoniker": "Assets\\Shaders\\LeftToRightFill.shader",
@@ -62,7 +62,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "CircleFill.shader",
               "DocumentMoniker": "E:\\UProjects\\TicTacToe\\Assets\\Shaders\\CircleFill.shader",
               "RelativeDocumentMoniker": "Assets\\Shaders\\CircleFill.shader",
@@ -74,7 +74,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "UIManager.cs",
               "DocumentMoniker": "E:\\UProjects\\TicTacToe\\Assets\\Scripts\\UIManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UIManager.cs",
@@ -82,24 +82,24 @@
               "RelativeToolTip": "Assets\\Scripts\\UIManager.cs",
               "ViewState": "AgIAAFkAAAAAAAAAAAA1wGoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-19T04:43:47.594Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-19T04:43:47.594Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "GameManager.cs",
               "DocumentMoniker": "E:\\UProjects\\TicTacToe\\Assets\\Scripts\\GameManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\GameManager.cs",
               "ToolTip": "E:\\UProjects\\TicTacToe\\Assets\\Scripts\\GameManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\GameManager.cs",
-              "ViewState": "AgIAAAsCAAAAAAAAAAA1wAIAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAAgCAAAAAAAAAMBAwAwCAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-19T03:30:03.961Z"
+              "WhenOpened": "2025-05-19T03:30:03.961Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Cell.cs",
               "DocumentMoniker": "E:\\UProjects\\TicTacToe\\Assets\\Scripts\\Cell.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Cell.cs",

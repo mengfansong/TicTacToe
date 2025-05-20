@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
         //绘制棋盘棋子
         DrawBoard();
 
-        GoFirstTurn(playerRole == Role.X);
+        
 
     }
 
@@ -152,6 +152,8 @@ public class GameManager : MonoBehaviour
             }
         }
         Debug.Log("棋盘生成完毕");
+        //进入第一回合
+        GoFirstTurn(playerRole == Role.X);
     }
 
 
@@ -520,7 +522,7 @@ public class GameManager : MonoBehaviour
         return moves;
     }
 
-    //刷新鼠标指针
+    //刷新鼠标悬停位置
     private void RefreshHover()
     {
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
